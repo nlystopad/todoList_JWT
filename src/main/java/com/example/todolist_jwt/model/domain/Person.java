@@ -41,8 +41,8 @@ public class Person implements UserDetails, Serializable {
     private List<Task> tasks;
     private Boolean enabled = true;
 
-    public Person(String username, String password) {
-        this.email = username;
+    public Person(String email, String password) {
+        this.email = email;
         this.password = password;
         this.enabled = true;
     }

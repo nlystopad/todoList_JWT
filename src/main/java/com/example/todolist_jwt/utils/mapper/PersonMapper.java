@@ -6,8 +6,10 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
-public interface PersonViewMapper {
-    PersonViewMapper INSTANCE = Mappers.getMapper(PersonViewMapper.class);
+public interface PersonMapper {
+   PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 
-    PersonView PersonToPersonView(Person person);
+   PersonView personToPersonView(Person person);
+   Person personViewToPerson(PersonView personView);
+
 }

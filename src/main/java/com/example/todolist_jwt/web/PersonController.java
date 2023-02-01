@@ -5,7 +5,7 @@ import com.example.todolist_jwt.model.dto.AuthRequest;
 import com.example.todolist_jwt.model.dto.PersonView;
 import com.example.todolist_jwt.service.impl.PersonServiceImpl;
 import com.example.todolist_jwt.utils.configuration.security.JwtTokenUtil;
-import com.example.todolist_jwt.utils.mapper.PersonViewMapper;
+import com.example.todolist_jwt.utils.mapper.PersonMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +24,7 @@ public class PersonController {
     private final PersonServiceImpl personService;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
+    private final PersonMapper personMapper;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/register")
@@ -42,7 +43,7 @@ public class PersonController {
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.AUTHORIZATION, jwtTokenUtil.generateAccessToken(person))
-                    .body(PersonViewMapper.INSTANCE.PersonToPersonView(person));
+                    .body(personMapper.personToPersonView(person));
         } catch (BadCredentialsException exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
